@@ -195,7 +195,11 @@ iface = if node['mariadb']['galera']['wsrep_node_address_interface'].empty?
           node['mariadb']['galera']['wsrep_node_address_interface']
         end
 node['network']['interfaces'][iface]['addresses'].each do |ip, params|
-  params['family'] == 'inet' && ipaddress = ip
+  if params['family'] == 'inet'
+    ipaddress = ip
+    # Use the first ipv4 address on this interface
+    break
+  end
 end
 galera_options['wsrep_node_address'] = unless ipaddress.empty?
                                          if String(node['mariadb']['galera']['wsrep_node_port']).empty?
