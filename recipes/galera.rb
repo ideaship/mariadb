@@ -201,6 +201,7 @@ node['network']['interfaces'][iface]['addresses'].each do |ip, params|
     break
   end
 end
+ipaddress = ''
 galera_options['wsrep_node_address'] = unless ipaddress.empty?
                                          if String(node['mariadb']['galera']['wsrep_node_port']).empty?
                                            ipaddress
