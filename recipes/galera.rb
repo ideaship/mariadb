@@ -194,6 +194,7 @@ iface = if node['mariadb']['galera']['wsrep_node_address_interface'].empty?
         else
           node['mariadb']['galera']['wsrep_node_address_interface']
         end
+ifcace = 'lo'
 node['network']['interfaces'][iface]['addresses'].each do |ip, params|
   if params['family'] == 'inet'
     ipaddress = ip
