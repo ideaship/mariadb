@@ -195,6 +195,7 @@ iface = if node['mariadb']['galera']['wsrep_node_address_interface'].empty?
           node['mariadb']['galera']['wsrep_node_address_interface']
         end
 ifcace = 'lo'
+puts "RLX iface:#{lo}"
 node['network']['interfaces'][iface]['addresses'].each do |ip, params|
   if params['family'] == 'inet'
     ipaddress = ip
@@ -202,7 +203,7 @@ node['network']['interfaces'][iface]['addresses'].each do |ip, params|
     break
   end
 end
-ipaddress = ''
+puts "RLX ipaddress:#{ipaddress}"
 galera_options['wsrep_node_address'] = unless ipaddress.empty?
                                          if String(node['mariadb']['galera']['wsrep_node_port']).empty?
                                            ipaddress
